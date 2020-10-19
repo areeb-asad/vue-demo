@@ -13,11 +13,12 @@
 
 <script>
 export default {
-name: "Polls",
+  name: "Polls",
   props: {
     title: String
+  },
+
   }
-}
 </script>
 
 <style scoped>

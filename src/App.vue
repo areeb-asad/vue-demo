@@ -9,7 +9,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import LatestPosts from "./components/LatestPosts";
+import LatestPosts from "@/components/LatestPosts";
 import Polls from "@/components/Polls";
 
 export default {
