@@ -1,61 +1,64 @@
 <template>
-<div >
-<h2>{{title}}</h2>
-  <ul>
+  <div>
+    <h2>{{ title }}</h2>
+    <ul>
 
-    <li v-for="post in posts" :key="post">
+      <li v-for="post in posts" :key="post.id">
 
-      {{post.title}}
+        {{ post.content }}
 
-    </li>
+      </li>
 
-  </ul>
+    </ul>
+    <h1 class="error">{{error_message}}</h1>
 
-</div>
+  </div>
 </template>
 
 <script>
+/* eslint-disable */
+import axios from 'axios'
+
 export default {
-name: "LatestPosts",
+  name: "LatestPosts",
   props: {
     title: String
   },
 
   data() {
     return {
-      posts:   [
-        {
-          "title": "Fifth Post",
-          "pub_date": "2020-10-19T11:03:03Z",
-          "content": "This Is Your FifthPost"
-        },
-        {
-          "title": "Forth Post",
-          "pub_date": "2020-10-19T11:02:41Z",
-          "content": "This Is Your Forth Post"
-        },
-        {
-          "title": "Third Post",
-          "pub_date": "2020-10-10T05:35:27Z",
-          "content": "This Is Your Third Post"
-        },
-        {
-          "title": "Second Post",
-          "pub_date": "2020-10-10T05:35:05Z",
-          "content": "This Is Your Second Post"
-        },
-        {
-          "title": "First Post",
-          "pub_date": "2020-10-10T05:34:52Z",
-          "content": "This Is Your First Post"
-        }
-      ]
+      posts: null,
+      error_message:''
 
     }
-  }
+  },
+  created() {
+    console.log('fetching Data')
+    let configs = {
+      responseType: 'json',
+    }
+    axios.get('http://127.0.0.1:8000/blog/posts/', configs)
+        .then(response => {
+              console.log('response arrived')
+              let data_from_server = response.data
+              let status_code = response.status
+              console.log(data_from_server)
+              console.log(status_code)
+              this.posts = data_from_server
+            }
+        ).catch(error => {
+          console.log('response Error')
+          this.error_message = "please see Areeb for help"
+        }
+    )
+    console.log('fetching Data done')
+
+  },
 }
 </script>
 
 <style scoped>
-
+.error{
+  color: red;
+}
 </style>
