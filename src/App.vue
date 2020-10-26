@@ -2,18 +2,15 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <LatestPosts title="Latest Posts Title"/>
-    <polls title="Polls Title" />
   </div>
 </template>
 
 <script>
 import LatestPosts from "@/components/LatestPosts";
-import Polls from "@/components/Polls";
 
 export default {
   name: 'App',
   components: {
-    Polls,
     LatestPosts
   }
 }

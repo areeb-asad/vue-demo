@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
+
     <ul>
 
       <li v-for="post in posts" :key="post.id">
@@ -11,6 +12,7 @@
 
     </ul>
     <h1 class="error">{{error_message}}</h1>
+    <h1 v-if="!loaded">Loading...</h1>
 
   </div>
 </template>
@@ -28,7 +30,8 @@ export default {
   data() {
     return {
       posts: null,
-      error_message:''
+      error_message:'',
+      loaded : false
 
     }
   },
@@ -45,10 +48,12 @@ export default {
               console.log(data_from_server)
               console.log(status_code)
               this.posts = data_from_server
+              this.loaded=true
             }
         ).catch(error => {
           console.log('response Error')
           this.error_message = "please see Areeb for help"
+          this.loaded = true
         }
     )
     console.log('fetching Data done')
